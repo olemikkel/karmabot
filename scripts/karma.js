@@ -18,6 +18,8 @@ module.exports = function hubot(robot) {
         const count = (robot.brain.get(user) || 0) + 1;
         robot.brain.set(user, count);
         botResponse = `${botResponse}Woot! @${user} now at ${count} — Gz!\n`;
+      } else {
+        botResponse = `${botResponse}Nice try @${user}! :wink:`;
       }
     });
 
