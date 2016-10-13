@@ -1,0 +1,35 @@
+{
+  "name": "karmabot",
+  "version": "0.0.0",
+  "private": true,
+  "author": "brian@betaworks.com",
+  "description": "Upvote for awesome, downvote for foolish",
+  "scripts": {
+    "lint": "eslint --ext .js scripts/",
+    "lint:watch": "DEBUG=* esw --ext .js --color --watch scripts/",
+    "test": "mocha --require coffee-script/register --compilers coffee:coffee-script --no-deprecation test/setup.js test/**/*-test.js",
+    "test:watch": "mocha --require coffee-script/register --compilers coffee:coffee-script --no-deprecation --watch test/setup.js test/**/*-test.js"
+  },
+  "dependencies": {
+    "hubot": "^2.11.4",
+    "hubot-diagnostics": "0.0.1",
+    "hubot-redis-brain": "0.0.2",
+    "hubot-scripts": "^2.5.16",
+    "hubot-slack": "^3.3.0"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "co": "^4.6.0",
+    "coffee-script": "^1.11.1",
+    "eslint": "^3.7.1",
+    "eslint-config-airbnb-base": "^8.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-mocha": "^4.6.0",
+    "eslint-watch": "^2.1.14",
+    "hubot-test-helper": "^1.5.0",
+    "mocha": "^3.1.0"
+  }
+}

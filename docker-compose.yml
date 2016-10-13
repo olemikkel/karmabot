@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  redis:
+    network_mode: 'bridge'
+    image: redis:3
+
+  node:
+    image: node:6
+    working_dir: /usr/src/app
+    network_mode: 'bridge'
+    links:
+      - redis
+    depends_on:
+      - redis
+    volumes:
+      - .:/usr/src/app
+    env_file: .env
+    environment:
+      - HUBOT_SLACK_BOTNAME=karmabot
+      - NODE_ENV=development
+      - NPM_CONFIG_LOGLEVEL=debug
+      - NPM_CONFIG_PROGRESS=false
+      - NPM_CONFIG_SPIN=false
+    command: './bin/hubot --adapter slack'
