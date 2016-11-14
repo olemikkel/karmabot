@@ -1,7 +1,7 @@
 module.exports = function hubot(robot) {
-  const incrementRegExp = /@([a-z0-9_\-\.]+)\s?\+{2,}/ig
-  const decrementRegExp = /@([a-z0-9_\-\.]+)\s?\-{2,}/ig
-  const adjustRegExp = /@([a-z0-9_\-\.]+)\s?[\+\-]{2,}/ig;
+  const incrementRegExp = /([a-z0-9_\-\.]+)\s?\+{2,}/ig
+  const decrementRegExp = /([a-z0-9_\-\.]+)\s?\-{2,}/ig
+  const adjustRegExp = /([a-z0-9_\-\.]+)\s?[\+\-]{2,}/ig;
 
   robot.hear(adjustRegExp, (res) => {
     const {robot, message, match, envelope} = res;
@@ -11,8 +11,7 @@ module.exports = function hubot(robot) {
     const decrements = message.text.match(decrementRegExp) || [];
 
     increments.forEach((match) => {
-      const user = match.replace(/^@([\w\.\-]+)\s?\+{2,}$/, '$1');
-      robot.brain.set('test', 20);
+      const user = match.replace(/^([\w\.\-]+)\s?\+{2,}$/, '$1');
 
       if (user !== message.user.name) {
         const count = (robot.brain.get(user) || 0) + 1;
@@ -24,7 +23,7 @@ module.exports = function hubot(robot) {
     });
 
     decrements.forEach((match) => {
-      const user = match.replace(/^@([\w\.\-]+)\s?\-{2,}$/, '$1');
+      const user = match.replace(/^([\w\.\-]+)\s?\-{2,}$/, '$1');
       const count = (robot.brain.get(user) || 0);
 
       if (count > 0) {
