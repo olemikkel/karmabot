@@ -24,14 +24,14 @@ module.exports = function hubot(robot) {
 
     decrements.forEach((match) => {
       const user = match.replace(/^([\w\.\-]+)\s?\-{2,}$/, '$1');
-      const count = (robot.brain.get(user) || 0);
+      const count = (robot.brain.get(user) || 0) - 1;
+
+      robot.brain.set(user, count);
 
       if (count > 0) {
-        count--;
-        robot.brain.set(user, count);
         botResponse = `${botResponse}OMG! @${user} now at ${count} — Sorry!\n`;
       } else {
-        botResponse = `${botResponse}@${user} is already at 0 — Can't get much lower. :grimacing:\n`;
+        botResponse = `${botResponse}Oh lord — negative karma! @${user} now at ${count} — You should really start behaving!\n`;
       }
 
     });
