@@ -1,7 +1,7 @@
 module.exports = function hubot(robot) {
-  const incrementRegExp = /^([a-z0-9_\-]+)(\s{1})?\+{2,}$/ig;
-  const decrementRegExp = /^([a-z0-9_\-]+)(\s{1})?\-{2,}$/ig;
-  const adjustRegExp = /^([a-z0-9_\-\.]+)\s?[\+\-]{2,}$/ig;
+  const incrementRegExp = /^([a-z0-9_\-\.\@]+)(\s{1})?\+{2,}$/ig;
+  const decrementRegExp = /^([a-z0-9_\-\.\@]+)(\s{1})?\-{2,}$/ig;
+  const adjustRegExp = /^([a-z0-9_\-\.\@]+)\s?[\+\-]{2,}$/ig;
 
   robot.hear(adjustRegExp, (res) => {
     const {robot, message, match, envelope} = res;
