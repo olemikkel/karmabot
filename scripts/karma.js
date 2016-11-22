@@ -10,15 +10,17 @@ module.exports = function hubot(robot) {
     const increments = message.text.match(incrementRegExp) || [];
     const decrements = message.text.match(decrementRegExp) || [];
 
+    if (message.text.toLowerCase() === 'c++') {
+      return;
+    }
+    
     increments.forEach((match) => {
       const user = match.replace(/^([\w\.\-]+)\s?\+{2,}$/, '$1');
 
       if (user !== message.user.name) {
         const count = (robot.brain.get(user) || 0) + 1;
         robot.brain.set(user, count);
-        botResponse = `${botResponse}Woot! @${user} now at ${count} — Gz!\n`;
-      } else {
-        botResponse = `${botResponse}Nice try @${user}! :wink:`;
+        botResponse = `${botResponse} ${user}'s karma has increased to ${count}\n`;
       }
     });
 
@@ -27,13 +29,7 @@ module.exports = function hubot(robot) {
       const count = (robot.brain.get(user) || 0) - 1;
 
       robot.brain.set(user, count);
-
-      if (count > 0) {
-        botResponse = `${botResponse}OMG! @${user} now at ${count} — Sorry!\n`;
-      } else {
-        botResponse = `${botResponse}Oh lord — negative karma! @${user} now at ${count} — You should really start behaving!\n`;
-      }
-
+      botResponse = `${botResponse} ${user}'s karma has decreased to ${count}\n`;
     });
 
     return res.send(`${botResponse}`);
